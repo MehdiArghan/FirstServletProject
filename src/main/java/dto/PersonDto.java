@@ -1,8 +1,8 @@
-package entity;
+package dto;
 
 import base.entity.BaseEntity;
+import entity.Vote;
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -15,8 +15,8 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Entity
-public class Person extends BaseEntity<Long> {
+@Builder
+public class PersonDto extends BaseEntity<Long> {
     @NotNull(message = "firstName cannot be null")
     @NotEmpty(message = "firstName cannot be empty")
     @Column(nullable = false)
@@ -35,7 +35,7 @@ public class Person extends BaseEntity<Long> {
     String password;
     @OneToOne
     Vote vote;
-    public Person(String firstName, String lastName, String userName, String password) {
+    public PersonDto(String firstName, String lastName, String userName, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
