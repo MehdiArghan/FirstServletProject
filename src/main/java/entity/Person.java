@@ -16,6 +16,7 @@ import lombok.experimental.FieldDefaults;
 @ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
+@Builder
 public class Person extends BaseEntity<Long> {
     @NotNull(message = "firstName cannot be null")
     @NotEmpty(message = "firstName cannot be empty")
@@ -35,6 +36,7 @@ public class Person extends BaseEntity<Long> {
     String password;
     @OneToOne
     Vote vote;
+
     public Person(String firstName, String lastName, String userName, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
