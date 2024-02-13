@@ -3,7 +3,6 @@ package dto;
 import base.entity.BaseEntity;
 import entity.Vote;
 import jakarta.persistence.Column;
-import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -33,12 +32,5 @@ public class PersonDto extends BaseEntity<Long> {
     @NotEmpty(message = "password cannot be empty")
     @Column(nullable = false)
     String password;
-    @OneToOne
     Vote vote;
-    public PersonDto(String firstName, String lastName, String userName, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.userName = userName;
-        this.password = password;
-    }
 }
