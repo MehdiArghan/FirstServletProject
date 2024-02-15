@@ -23,16 +23,16 @@
 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active " style="color: black" aria-current="page" href="index.jsp">Home</a>
+                    <a class="nav-link active " style="color: black" aria-current="page" href="index.jsp"><strong>Home</strong></a>
                 </li>
             </ul>
 
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" style="color: black" aria-current="page" href="signUp.jsp">Signup</a>
+                    <a class="nav-link" style="color: black" aria-current="page" href="signup.jsp"><strong>Signup</strong></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="color: black" aria-current="page" href="login.jsp">Login</a>
+                    <a class="nav-link" style="color: black" aria-current="page" href="login.jsp"><strong>Login</strong></a>
                 </li>
             </ul>
 
