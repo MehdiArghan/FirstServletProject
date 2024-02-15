@@ -29,7 +29,7 @@
 
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" style="color: black" aria-current="page" href="signUp.jsp">SignUp</a>
+                    <a class="nav-link" style="color: black" aria-current="page" href="signUp.jsp">Signup</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" style="color: black" aria-current="page" href="login.jsp">Login</a>
