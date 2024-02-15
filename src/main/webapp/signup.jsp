@@ -44,7 +44,7 @@
             <div class="card mt-4">
                 <div class="card-header text-center fs-4"><h3>Signup</h3></div>
                 <div class="card-body">
-                    <form action="" method="post" target="_self">
+                    <form action="signup" method="post" target="_self">
                         <div class="mb-3">
                             <label for="firstName" class="form-label"><strong>Firstname :</strong></label>
                             <input type="text" class="form-control" id="firstName" name="firstName"
@@ -78,7 +78,6 @@
         </div>
     </div>
 </div>
-
 
 </body>
 </html>
