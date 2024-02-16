@@ -1,3 +1,4 @@
+<%@ page import="entity.Person" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -28,12 +29,31 @@
             </ul>
 
             <ul class="navbar-nav ml-auto">
+                <%
+                    Person person = (Person) session.getAttribute("currentPerson");
+                    if (person == null) {
+                %>
                 <li class="nav-item">
-                    <a class="nav-link" style="color: black" aria-current="page" href="signup.jsp"><strong>Signup</strong></a>
+                    <a class="nav-link" style="color: black" aria-current="page"
+                       href="signup.jsp"><strong>Signup</strong></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" style="color: black" aria-current="page" href="login.jsp"><strong>Login</strong></a>
                 </li>
+                <%
+                } else {
+                %>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: black" aria-current="page" href="election.jsp">
+                        <%=person.getUserName()%>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: black" aria-current="page" href="">Logout</a>
+                </li>
+                <%
+                    }
+                %>
             </ul>
 
         </div>

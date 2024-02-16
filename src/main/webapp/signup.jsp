@@ -1,11 +1,12 @@
+<%@ page import="entity.Person" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 
 <head>
-    <title>SingUp</title>
+    <title>Signup</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/Signup.css">
+    <link rel="stylesheet" href="css/signup.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
@@ -29,6 +30,10 @@
             </ul>
 
             <ul class="navbar-nav ml-auto">
+                <%
+                    Person person = (Person) session.getAttribute("currentPerson");
+                    if (person == null) {
+                %>
                 <li class="nav-item">
                     <a class="nav-link" style="color: black" aria-current="page"
                        href="signup.jsp"><strong>Signup</strong></a>
@@ -36,6 +41,20 @@
                 <li class="nav-item">
                     <a class="nav-link" style="color: black" aria-current="page" href="login.jsp"><strong>Login</strong></a>
                 </li>
+                <%
+                } else {
+                %>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: black" aria-current="page" href="election.jsp">
+                        <%=person.getUserName()%>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: black" aria-current="page" href="">Logout</a>
+                </li>
+                <%
+                    }
+                %>
             </ul>
 
         </div>
@@ -52,7 +71,8 @@
                     if (messageSavePerson != null) {
                 %>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong><%= messageSavePerson %></strong>
+                    <strong><%= messageSavePerson %>
+                    </strong>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 <%
@@ -64,7 +84,8 @@
                     if (error != null) {
                 %>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong><%= error %></strong>
+                    <strong><%= error %>
+                    </strong>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 <%
