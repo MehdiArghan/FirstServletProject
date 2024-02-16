@@ -38,7 +38,7 @@ public abstract class BaseRepositoryImpl<ID extends Serializable, Entity extends
 
     @Override
     public List<Entity> findAll() {
-        return entityManager.createQuery(" from " + getEntityClass().getSimpleName(), getEntityClass())
+        return entityManager.createQuery("from " + getEntityClass().getSimpleName(), getEntityClass())
                 .getResultList();
     }
 }

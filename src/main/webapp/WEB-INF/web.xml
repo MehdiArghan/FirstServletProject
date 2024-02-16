@@ -9,7 +9,7 @@
     </filter>
     <filter-mapping>
         <filter-name>FilterSingUp</filter-name>
-        <url-pattern>/singup</url-pattern>
+        <url-pattern>/signup</url-pattern>
     </filter-mapping>
     <servlet>
         <servlet-name>ServletSignup</servlet-name>

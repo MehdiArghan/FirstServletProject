@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="css/Signup.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -20,13 +23,15 @@
 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active " style="color: black" aria-current="page" href="index.jsp"><strong>Home</strong></a>
+                    <a class="nav-link active " style="color: black" aria-current="page"
+                       href="index.jsp"><strong>Home</strong></a>
                 </li>
             </ul>
 
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" style="color: black" aria-current="page" href="signup.jsp"><strong>Signup</strong></a>
+                    <a class="nav-link" style="color: black" aria-current="page"
+                       href="signup.jsp"><strong>Signup</strong></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" style="color: black" aria-current="page" href="login.jsp"><strong>Login</strong></a>
@@ -41,7 +46,31 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-4 offset-md-4">
-            <div class="card mt-4">
+            <div class="card mt-3">
+                <%
+                    String messageSavePerson = (String) session.getAttribute("messageSavePerson");
+                    if (messageSavePerson != null) {
+                %>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong><%= messageSavePerson %></strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <%
+                        session.removeAttribute("messageSavePerson");
+                    }
+                %>
+                <%
+                    String error = (String) session.getAttribute("error");
+                    if (error != null) {
+                %>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong><%= error %></strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <%
+                        session.removeAttribute("error");
+                    }
+                %>
                 <div class="card-header text-center fs-4"><h3>Signup</h3></div>
                 <div class="card-body">
                     <form action="signup" method="post" target="_self">

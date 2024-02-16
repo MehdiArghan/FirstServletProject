@@ -9,9 +9,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import jakarta.validation.Validation;
 import repository.PersonRepository;
 import repository.impl.PersonRepositoryImpl;
+import security.PasswordHash;
 import service.PersonService;
 import service.impl.PersonServiceImpl;
 import util.CheckValidation;
@@ -23,6 +23,7 @@ public class Signup extends HttpServlet {
     PersonRepository personRepository;
     PersonService personService;
     PersonDtoMapper personDtoMapper;
+    PasswordHash passwordHash;
 
     @Override
     public void init() {
@@ -30,6 +31,7 @@ public class Signup extends HttpServlet {
         personRepository = new PersonRepositoryImpl(entityManager);
         personService = new PersonServiceImpl(entityManager, personRepository);
         personDtoMapper = new PersonDtoMapper();
+        passwordHash = new PasswordHash();
     }
 
     @Override
@@ -38,25 +40,31 @@ public class Signup extends HttpServlet {
         String lastName = req.getParameter("lastName");
         String userName = req.getParameter("userName");
         String password = req.getParameter("password");
+        try {
+            String hashedPassword = passwordHash.createHashedPassword(password);
 
-        PersonDto userDto = PersonDto.builder()
-                .firstName(firstName)
-                .lastName(lastName)
-                .userName(userName)
-                .password(password)
-                .build();
+            PersonDto personDto = PersonDto.builder()
+                    .firstName(firstName)
+                    .lastName(lastName)
+                    .userName(userName)
+                    .password(hashedPassword)
+                    .build();
 
-        boolean validate = CheckValidation.isValid(userDto);
-
-        if (!validate) {
-            req.setAttribute("error", "person validation is error");
-        } else {
-            personService.save(personDtoMapper.getPersonDtoToPerson(userDto));
-            resp.setCharacterEncoding("UTF-8");
-            String message = firstName + " " + lastName + " added successfully";
+            boolean validate = CheckValidation.isValid(personDto);
             HttpSession httpSession = req.getSession();
-            httpSession.setAttribute("message", message);
-            getServletContext().getRequestDispatcher("/signup.jsp").forward(req, resp);
+
+            if (!validate) {
+                httpSession.setAttribute("error", "person validation is error");
+                getServletContext().getRequestDispatcher("/signup.jsp").forward(req, resp);
+            } else {
+                personService.save(personDtoMapper.getPersonDtoToPerson(personDto));
+                resp.setCharacterEncoding("UTF-8");
+                String message = firstName + " " + lastName + " added successfully";
+                httpSession.setAttribute("messageSavePerson", message);
+                getServletContext().getRequestDispatcher("/signup.jsp").forward(req, resp);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }
