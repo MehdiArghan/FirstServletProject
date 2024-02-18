@@ -13,5 +13,5 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 public class Vote extends BaseEntity<Long> {
-    String vote;
+    String voteName;
 }

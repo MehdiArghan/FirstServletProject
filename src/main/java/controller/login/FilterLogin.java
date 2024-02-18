@@ -15,7 +15,6 @@ import service.PersonService;
 import service.impl.PersonServiceImpl;
 
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 
 @WebFilter(filterName = "FilterLogin", servletNames = "ServletLogin", urlPatterns = "/Login")
 public class FilterLogin implements Filter {
@@ -32,20 +31,23 @@ public class FilterLogin implements Filter {
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
 
-        Person person = personService.findByUserName(userName);
-        boolean isEqual = false;
-
         try {
+            Person person = personService.findByUserName(userName);
+            boolean isEqual;
             isEqual = passwordHash.checkEqualityOfHashedPassword(password, person.getPassword());
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
-
-        HttpSession httpSession = request.getSession();
-        if (userName.equals(person.getUserName()) && isEqual) {
-            httpSession.setAttribute("currentPerson", person);
-            filterChain.doFilter(request, response);
-        } else {
+            if (userName.equals(person.getUserName()) && isEqual) {
+                HttpSession httpSession = request.getSession();
+                httpSession.setAttribute("currentPerson", person);
+                filterChain.doFilter(request, response);
+            } else {
+                HttpSession httpSession = request.getSession();
+                String error = ("username/password is invalid");
+                httpSession.setAttribute("error", error);
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/login.jsp");
+                requestDispatcher.forward(request, response);
+            }
+        } catch (Exception e) {
+            HttpSession httpSession = request.getSession();
             String error = ("username/password is invalid");
             httpSession.setAttribute("error", error);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/login.jsp");

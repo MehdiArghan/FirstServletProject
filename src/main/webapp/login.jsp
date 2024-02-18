@@ -46,11 +46,12 @@
                 %>
                 <li class="nav-item">
                     <a class="nav-link" style="color: black" aria-current="page" href="election.jsp">
-                        <%=person.getUserName()%>
+                        <strong><%=person.getUserName()%> </strong>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="color: black" aria-current="page" href="">Logout</a>
+                    <a class="nav-link" style="color: black" aria-current="page"
+                       href="Logout"><strong>Logout</strong></a>
                 </li>
 
                 <%

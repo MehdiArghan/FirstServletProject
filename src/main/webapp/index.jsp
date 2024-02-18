@@ -24,7 +24,8 @@
 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active " style="color: black" aria-current="page" href="index.jsp"><strong>Home</strong></a>
+                    <a class="nav-link active " style="color: black" aria-current="page"
+                       href="index.jsp"><strong>Home</strong></a>
                 </li>
             </ul>
 
@@ -45,11 +46,11 @@
                 %>
                 <li class="nav-item">
                     <a class="nav-link" style="color: black" aria-current="page" href="election.jsp">
-                        <%=person.getUserName()%>
+                        <strong><%=person.getUserName()%></strong>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="color: black" aria-current="page" href="">Logout</a>
+                    <a class="nav-link" style="color: black" aria-current="page" href="Logout"><strong>Logout</strong></a>
                 </li>
                 <%
                     }
