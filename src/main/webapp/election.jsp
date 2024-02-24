@@ -2,17 +2,12 @@
 <%@ page import="java.util.List" %>
 <%@ page import="base.repository.util.HibernateUtil" %>
 <%@ page import="jakarta.persistence.EntityManager" %>
-<%@ page import="repository.impl.PersonRepositoryImpl" %>
-<%@ page import="service.PersonService" %>
-<%@ page import="service.impl.PersonServiceImpl" %>
 <%@ page import="java.util.Optional" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.Iterator" %>
-<%@ page import="org.hibernate.dialect.function.ListaggStringAggEmulation" %>
 <%@ page import="service.VoteService" %>
 <%@ page import="service.impl.VoteServiceImpl" %>
 <%@ page import="repository.impl.VoteRepositoryImpl" %>
 <%@ page import="entity.Vote" %>
+<%@ page import="java.text.DecimalFormat" %>
 <%
     Person currentPerson = (Person) session.getAttribute("currentPerson");
     if (currentPerson == null) {
@@ -201,16 +196,23 @@
                                     break;
                             }
                         }
+                        DecimalFormat decimalFormat = new DecimalFormat("#.#");
+                        double sum = numberEsteghlal + numberPersepolis + numberSepahan + numberTractor + numberOther;
+                        String newNumberEsteghlal = decimalFormat.format((numberEsteghlal / sum) * 100);
+                        String newNumberPersepolis = decimalFormat.format((numberPersepolis / sum) * 100);
+                        String newNumberSepahan = decimalFormat.format((numberSepahan / sum) * 100);
+                        String newNumberTractor = decimalFormat.format((numberTractor / sum) * 100);
+                        String newNumberOther = decimalFormat.format((numberOther / sum) * 100);
                 %>
-                <strong>Esteghlal:<%=numberEsteghlal%>
+                <strong>Esteghlal:<%=newNumberEsteghlal%>%
                 </strong><br>
-                <strong>Persepolis:<%=numberPersepolis%>
+                <strong>Persepolis:<%=newNumberPersepolis%>%
                 </strong><br>
-                <strong>Sepahan:<%=numberSepahan%>
+                <strong>Sepahan:<%=newNumberSepahan%>%
                 </strong><br>
-                <strong>Tractor:<%=numberTractor%>
+                <strong>Tractor:<%=newNumberTractor%>%
                 </strong><br>
-                <strong>Other:<%=numberOther%>
+                <strong>Other:<%=newNumberOther%>%
                 </strong>
             </div>
             <% }%>
