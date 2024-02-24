@@ -5,6 +5,8 @@ import entity.Person;
 import jakarta.persistence.EntityManager;
 import repository.PersonRepository;
 
+import java.util.Optional;
+
 public class PersonRepositoryImpl extends BaseRepositoryImpl<Long, Person> implements PersonRepository {
     EntityManager entityManager;
 
